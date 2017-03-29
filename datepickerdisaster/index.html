@@ -12,40 +12,45 @@
 	</head>
 	<body>
 
-		<input type="text" id="datepicker">
+		<input type="text" id="datepicker" style="display: none;">
 		<div id="container"></div>
+		<h3>Red Light Cameras Posted on <span id="datedisplay"></span></h3>
+		<ul id="output"></ul>
 
 		<script src="../lib/moment.min.js"></script>
 		<script src="pikaday.js"></script>
 
 		<script type="text/javascript">
 
-			$.get('../secrets.txt', {}, data => {
-				var secrets = {};
-				var lines = data.split('\n');
-				lines.forEach(line => {
-					var secret = line.split('::');
-					secrets[secret[0].trim()] = secret[1].trim();
-				});
-				console.log(secrets);
-			});
-
 			var datepicker = document.getElementById('datepicker');
 
 			var picker = new Pikaday({
 				field: datepicker,
-				disableWeekends: true
+				disableWeekends: true,
+				yearRange: [2004, 2010],
+				bound: false,
+				container: document.getElementById('container'),
+				onSelect: function(){
+					$.get('https://data.cityofchicago.org/resource/x3ag-h7gt.json', {
+						go_live_date: datepicker.value
+					}, listRedLightCameras);
+				}
 			});
 
-			var dp = document.querySelector('#datepicker');
-			console.log(dp);
-			var res = dp.click();
-			console.log(res);
-			var td = document.querySelector('button[data-pika-day="6"]');
-			console.log(td);
-			td.click();
+			function listRedLightCameras(cameras, status){
+				console.log(cameras, status);
+				// STUB: output the intersection for each camera as an <li> in ul#output
+				var output = document.getElementById('output');
+				cameras.forEach(camera => {
+					var li = document.createElement('li');
+						li.innerText = camera.intersection;
+						output.appendChild(li);
+				});
+			}
 
 		</script>
+
+		<script src="tests.js"></script>
 
 	</body>
 </html>
