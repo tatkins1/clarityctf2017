@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+
+
+		</style>
+	</head>
+	<body>
+
+
+		
+		<script type="text/javascript">
+
+			$.get('secrets.txt', {}, data => {
+				var secrets = {};
+				var lines = data.split('\n');
+				lines.forEach(line => {
+					var secret = line.split('::');
+					secrets[secret[0].trim()] = secret[1].trim();
+				});
+				console.log(secrets);
+			});
+
+		</script>
+
+	</body>
+</html>
