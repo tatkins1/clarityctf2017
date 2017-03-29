@@ -48,6 +48,8 @@
 						li.innerText = camera.intersection;
 						output.appendChild(li);
 				});
+				var datedisplay = document.getElementById('datedisplay');
+					datedisplay.innerText = moment(picker.getDate()).format('dddd MMMM DD[th], YYYY');
 			}
 
 		</script>
