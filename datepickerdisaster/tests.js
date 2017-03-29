@@ -26,6 +26,9 @@
 			console.log('%c>>> ' + instr, 'background: blue; color: white;');
 		}
 
+		if(!SECRETS['TEAM_API_KEY']){
+			throw new Error('Missing TEAM_API_KEY.');
+		}
 		if(!picker){
 			throw new Error('Must have global variable: picker');
 		}
@@ -50,7 +53,7 @@
 		}
 
 		$.post(CTF_URL + '12a', {
-			silent: true,
+			silent: SECRETS['IS_SILENT'],
 			team: SECRETS['TEAM_API_KEY'],
 			answer: containerDiv.innerHTML.search('pika-single')
 		}).then((res) => {
@@ -58,7 +61,7 @@
 		});
 
 		$.post(CTF_URL + '12b', {
-			silent: true,
+			silent: SECRETS['IS_SILENT'],
 			team: SECRETS['TEAM_API_KEY'],
 			answer: picker._o.disableWeekends
 		}).then((res) => {
@@ -66,7 +69,7 @@
 		});
 
 		$.post(CTF_URL + '12c', {
-			silent: true,
+			silent: SECRETS['IS_SILENT'],
 			team: SECRETS['TEAM_API_KEY'],
 			answer: picker._o.yearRange.toString()
 		}).then((res) => {
@@ -84,7 +87,7 @@
 			});
 
 			$.post(CTF_URL + '12d', {
-				silent: true,
+				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
 				answer: dateDisplayDiv.innerText
 			}).then((res) => {
@@ -92,7 +95,7 @@
 			});
 
 			$.post(CTF_URL + '12e', {
-				silent: true,
+				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
 				answer: count
 			}).then((res) => {
@@ -100,7 +103,7 @@
 			});
 
 			$.post(CTF_URL + '12f', {
-				silent: true,
+				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
 				answer: intersections.toString()
 			}).then((res) => {
