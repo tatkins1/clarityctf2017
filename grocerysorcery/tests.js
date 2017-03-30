@@ -119,12 +119,10 @@
 
 		communityField.value = 'Auburn Gresham';
 		communitySubmit.click();
-		var g = getCaughtError(1)
-		console.log(g)
 		$.post(CTF_URL + '15d', {
 			silent: SECRETS['IS_SILENT'],
 			team: SECRETS['TEAM_API_KEY'],
-			answer: g
+			answer: getCaughtError(1)
 		}).then((res) => {
 			displayResult(res);
 		});
