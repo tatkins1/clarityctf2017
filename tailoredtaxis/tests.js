@@ -29,6 +29,9 @@
 		if(!SECRETS['TEAM_API_KEY']){
 			throw new Error('Missing TEAM_API_KEY.');
 		}
+		if(!TAXI_DATASET_URL){
+			throw new Error('Tampering Error: Do not change TAXI_DATASET_URL.');
+		}
 
 		/*
 		  * AJAX Listener from S/O
@@ -100,6 +103,90 @@
 				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
 				answer: ans
+			}).then((res) => {
+				displayResult(res);
+			});
+		}
+
+		var options = [];
+		try{
+			var companySelector = document.getElementById('company');
+			if(companySelector){
+				submissions['16c'] = companySelector.value;
+				for(var i = 0; i < companySelector.children.length; i++){
+					options.push(companySelector.children[i]);
+				}
+			}
+		}
+		catch(e){
+			return true;
+		}
+		finally{
+			var allValid = true;
+			var validNames = 0;
+			var promises = options.map(option => {
+				return new Promise((resolve, reject) => {
+					$.get(TAXI_DATASET_URL, {
+						'company': option.value,
+						'$limit': 1
+					}, resolve);
+				});
+			});
+			Promise.all(promises).then(nameChecks => {
+				nameChecks.forEach(data => {
+					if(data[0]){
+						validNames++;
+					}
+					else{
+						allValid = false;
+					}
+				});
+				submissions['16b'] = allValid ? validNames : false;
+				$.post(CTF_URL + '16b', {
+					silent: SECRETS['IS_SILENT'],
+					team: SECRETS['TEAM_API_KEY'],
+					answer: submissions['16b']
+				}).then((res) => {
+					displayResult(res);
+				});
+				$.post(CTF_URL + '16c', {
+					silent: SECRETS['IS_SILENT'],
+					team: SECRETS['TEAM_API_KEY'],
+					answer: submissions['16c']
+				}).then((res) => {
+					displayResult(res);
+				});
+			});
+		}
+
+		try{
+			var rangeInput = document.getElementById('fare');
+			submissions['16d'] = rangeInput.type || false;
+			submissions['16e'] = [rangeInput.min, rangeInput.max].toString();
+			submissions['16f'] = rangeInput.step || false;
+		}
+		catch(e){
+			return true;
+		}
+		finally{
+			$.post(CTF_URL + '16d', {
+				silent: SECRETS['IS_SILENT'],
+				team: SECRETS['TEAM_API_KEY'],
+				answer: submissions['16d']
+			}).then((res) => {
+				displayResult(res);
+			});
+			$.post(CTF_URL + '16e', {
+				silent: SECRETS['IS_SILENT'],
+				team: SECRETS['TEAM_API_KEY'],
+				answer: submissions['16e']
+			}).then((res) => {
+				displayResult(res);
+			});
+			$.post(CTF_URL + '16f', {
+				silent: SECRETS['IS_SILENT'],
+				team: SECRETS['TEAM_API_KEY'],
+				answer: submissions['16f']
 			}).then((res) => {
 				displayResult(res);
 			});

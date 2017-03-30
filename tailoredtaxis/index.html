@@ -48,6 +48,18 @@
 				searchTaxiRides(null, null, 'Cash');
 			}
 
+			// Find as many valid company names as possible
+
+			$.get(TAXI_DATASET_URL, {}, data => {
+				var comps = {};
+				data.forEach(item => {
+					if(item.company){
+						comps[item.company] = true;
+					}
+				});
+				//console.log(Object.keys(comps).join('\n'));
+			});
+
 			function searchTaxiRides(company, fare, payment){
 				// Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
 				var query = {
