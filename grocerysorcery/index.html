@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Search for Grocery Stores</h1>
+
+		<div>
+			<h2>Search By Community</h2>
+			<input type="text" id="community">
+			<button id="submit-community">Search</button>
+			<h2>Search by ZIP Code</h2>
+			<input type="text" id="zipcode">
+			<button id="submit-zipcode">Submit</button>
+		</div>
+
+		<h2>Search Results</h2>
+		<div id="output"></div>
+
+
+		<script type="text/javascript">
+
+			var ERROR = {
+				// Easy Part: these are the error that can occur for community area searches
+				'C100': 'No results for community area search.',
+				'C101': 'No community area input.',
+				'C102': 'Community area must not contain periods or commas.',
+				'C103': 'Community area must not contain slashes.',
+				'C104': 'Community area must be uppercase.',
+				'C105': 'Community area must be at least four characters long.',
+				'C106': 'Community area must not be more than three words long.',
+				// Harder Part: you have to figure out what would cause error Z102
+				'Z100': 'No results for ZIP Code search.',
+				'Z101': 'No ZIP Code input.',
+				'Z102': 'ZIP Code must be valid.'
+			}
+
+			var GROCERY_DATASET_URL = 'https://data.cityofchicago.org/resource/j97f-trs4.json';
+
+			var communityButton = document.getElementById('submit-community');
+				communityButton.addEventListener('click', function(e){
+
+					var communityInput = document.getElementById('community');
+
+					if(communityInput.value !== communityInput.value.toUpperCase()){
+						throw new Error(ERROR['C104']);
+					}
+
+					if(communityInput.value.length < 4){
+						throw new Error(ERROR['C105']);
+					}
+
+					$.get(GROCERY_DATASET_URL, {
+						community_area_name: communityInput.value,
+					}, displayResults);
+
+				});
+
+			var zipcodeButton = document.getElementById('submit-zipcode');
+				zipcodeButton.addEventListener('click', function(e){
+
+					var zipcodeInput = document.getElementById('zipcode');
+
+					$.get(GROCERY_DATASET_URL, {
+						zip_code: zipcodeInput.value,
+					}, displayResults);
+
+				});
+
+			function displayResults(stores, status){
+				console.log(stores, status);
+				var output = document.getElementById('output');
+					output.innerHTML = '';
+				stores.forEach(store => {
+					var div = document.createElement('p');
+					var h3 = document.createElement('h3');
+						h3.innerText = store.store_name;
+						div.appendChild(h3);
+					var p = document.createElement('p');
+						p.innerText = store.address;
+						div.appendChild(p);
+					output.appendChild(div);
+				});
+			}
+				
+
+		</script>
+
+		<script src="tests.js"></script>
+
+	</body>
+</html>
