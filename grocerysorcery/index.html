@@ -35,7 +35,8 @@
 				'C104': 'Community area must not contain slashes.',
 				'C105': 'Community area must not contain quotation marks.',
 				'C106': 'Community area must be uppercase.',
-				'C107': 'Community area must be at least four characters long.'
+				'C107': 'Community area must be at least four characters long.',
+				'C108': 'Community area must not be more than three words long.'
 			}
 
 			var GROCERY_DATASET_URL = 'https://data.cityofchicago.org/resource/j97f-trs4.json';
@@ -44,6 +45,10 @@
 				communityButton.addEventListener('click', function(e){
 
 					var communityInput = document.getElementById('community');
+
+					if(communityInput.value !== communityInput.value.toUpperCase()){
+						throw new Error(ERROR['C106']);
+					}
 
 					if(communityInput.value.length < 4){
 						throw new Error(ERROR['C107']);
@@ -73,7 +78,7 @@
 
 		</script>
 
-		<!-- <script src="tests.js"></script> -->
+		<script src="tests.js"></script>
 
 	</body>
 </html>
