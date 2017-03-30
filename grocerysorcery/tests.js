@@ -49,11 +49,12 @@
 			throw new Error('Tampering Error: Do not remove #submit-zipcode.');
 		}
 
+		var IS_TESTING = true;
 		var caughtErrors = [];
 
 		window.onerror = err => {
 			caughtErrors.push(err);
-			return true;
+			return IS_TESTING;
 		}
 
 		function getCaughtError(){
@@ -78,12 +79,11 @@
 		communitySubmit.click();
 		console.log(getCaughtError());
 
-		communityField.value = 'BRONZEVILLE';
+		communityField.value = 'LOGAN SQUARE';
 		communitySubmit.click();
 		console.log(getCaughtError());
 
-
-		
+		IS_TESTING = false;
 
 	});
 })();
