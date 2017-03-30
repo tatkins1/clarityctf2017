@@ -29,21 +29,18 @@
 		<script type="text/javascript">
 
 			var ERROR = {
-				'Z100': 'No results for ZIP Code search.',
-				'Z101': 'No ZIP Code input.',
-				'Z102': 'ZIP Code must be a number.',
-				'Z103': 'ZIP Code must have only five digits.',
-				'Z104': 'ZIP Code must be in Chicago (60600 - 60700).',
+				// Easy Part: these are the error that can occur for community area searches
 				'C100': 'No results for community area search.',
 				'C101': 'No community area input.',
-				'C102': 'Community area must not contain periods.',
-				'C103': 'Community area must not contain commas.',
-				'C104': 'Community area must not contain question marks.',
-				'C105': 'Community area must not contain slashes.',
-				'C106': 'Community area must not contain quotation marks.',
-				'C107': 'Community area must be uppercase.',
-				'C108': 'Community area must be at least four characters long.',
-				'C109': 'Community area must not be more than three words long.',
+				'C102': 'Community area must not contain periods or commas.',
+				'C103': 'Community area must not contain slashes.',
+				'C104': 'Community area must be uppercase.',
+				'C105': 'Community area must be at least four characters long.',
+				'C106': 'Community area must not be more than three words long.',
+				// Harder Part: you have to figure out what would cause error Z102
+				'Z100': 'No results for ZIP Code search.',
+				'Z101': 'No ZIP Code input.',
+				'Z102': 'ZIP Code must be valid.'
 			}
 
 			var GROCERY_DATASET_URL = 'https://data.cityofchicago.org/resource/j97f-trs4.json';
@@ -54,11 +51,11 @@
 					var communityInput = document.getElementById('community');
 
 					if(communityInput.value !== communityInput.value.toUpperCase()){
-						throw new Error(ERROR['C106']);
+						throw new Error(ERROR['C104']);
 					}
 
 					if(communityInput.value.length < 4){
-						throw new Error(ERROR['C107']);
+						throw new Error(ERROR['C105']);
 					}
 
 					$.get(GROCERY_DATASET_URL, {

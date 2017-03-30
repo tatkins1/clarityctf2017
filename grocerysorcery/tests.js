@@ -53,12 +53,25 @@
 		var caughtErrors = [];
 
 		window.onerror = err => {
-			caughtErrors.push(err);
+			var errMsg = err.split('Uncaught Error: ')[1];
+			caughtErrors.push(errMsg);
 			return IS_TESTING;
 		}
 
-		function getCaughtError(){
-			return caughtErrors.shift() || 'No Error.';
+		var ERROR_REVERSE = {};
+		for(var err in ERROR){
+			ERROR_REVERSE[ERROR[err]] = err;
+		}
+
+		function getCaughtError(nn){
+			var n = nn || 1;
+			var errList = [];
+			for(var i = 0; i < n; i++){
+				var msg = caughtErrors.shift() || false;
+				var err = msg ? ERROR_REVERSE[msg] : 'NONE';
+				errList.push(err);
+			}
+			return errList.toString();
 		}
 
 		communityField.value = 'as';
@@ -73,15 +86,15 @@
 
 		communityField.value = 'aasdasds';
 		communitySubmit.click();
-		console.log(getCaughtError());
+		//console.log(getCaughtError());
 
 		communityField.value = 'AS';
 		communitySubmit.click();
-		console.log(getCaughtError());
+		//console.log(getCaughtError());
 
 		communityField.value = 'LOGAN SQUARE';
 		communitySubmit.click();
-		console.log(getCaughtError());
+		console.log(getCaughtError(3));
 
 		IS_TESTING = false;
 
