@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<div>
+			<h3>Search By Community</h3>
+			<input type="text" id="community">
+			<button id="submit-community">Search</button>
+			<h3>Search by ZIP Code</h3>
+			<input type="text" id="zipcode">
+			<button id="submit-zipcode">Submit</button>
+		</div>
+
+		<div id="output"></div>
+
+
+		<script type="text/javascript">
+
+			var ERROR = {
+				'Z101': 'ZIP Code must be a number.',
+				'Z102': 'ZIP Code must have only five digits.',
+				'Z103': 'ZIP Code must be in Chicago (60600 - 60700).',
+				'C101': 'Community area must not contain periods.',
+				'C102': 'Community area must not contain commas.',
+				'C103': 'Community area must not contain question marks.',
+				'C104': 'Community area must not contain slashes.',
+				'C105': 'Community area must not contain quotation marks.',
+				'C106': 'Community area must be uppercase.',
+				'C107': 'Community area must be at least four characters long.'
+			}
+
+			var GROCERY_DATASET_URL = 'https://data.cityofchicago.org/resource/j97f-trs4.json';
+
+			var communityButton = document.getElementById('submit-community');
+				communityButton.addEventListener('click', function(e){
+
+					var communityInput = document.getElementById('community');
+
+					if(communityInput.value.length < 4){
+						throw new Error(ERROR['C107']);
+					}
+
+					$.get(GROCERY_DATASET_URL, {
+						community_area_name: communityInput.value,
+					}, displayResults);
+
+				});
+
+			var zipcodeButton = document.getElementById('submit-zipcode');
+				zipcodeButton.addEventListener('click', function(e){
+
+					var zipcodeInput = document.getElementById('zipcode');
+
+					$.get(GROCERY_DATASET_URL, {
+						zip_code: zipcodeInput.value,
+					}, displayResults);
+
+				});
+
+			function displayResults(data, status){
+				console.log(data, status);
+			}
+				
+
+		</script>
+
+		<!-- <script src="tests.js"></script> -->
+
+	</body>
+</html>
