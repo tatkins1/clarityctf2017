@@ -5,14 +5,24 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<style type="text/css">
 
+			span {
+				display: inline-block;
+			}
 
+			span:nth-child(1) {
+				width: 150px;
+			}
+
+			span:nth-child(2) {
+				width: 125px;
+			}
 
 		</style>
 	</head>
 	<body>
 
 		<h1>Search Taxi Ride Records</h1>
-			<!-- Create Your Form Here -->
+			<p>Create Your Form Here</p>
 		<div>
 			
 		</div>
@@ -25,9 +35,20 @@
 
 			var TAXI_DATASET_URL = 'https://data.cityofchicago.org/resource/wrvz-psew.json';
 
+			/*
+			 * Call this function to search the rides dataset
+			 * You can search with no arguments, some, or all of them
+			 * This function always calls displayResults() when it finishes
+			 * If you see how it works, you can call a different callback function!
+			 */
+
+			// A sample search call: see the results on your page!
+			searchTaxiRides(null, null, 'Cash');
+
 			function searchTaxiRides(company, fare, payment){
+				// Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
 				var query = {
-					'$limit': 20 // Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
+					'$limit': 20
 				}
 				if(company){
 					query.company = company;
@@ -36,25 +57,37 @@
 					query.fare = fare;
 				}
 				if(payment){
-					query.payment = payment;
+					query.payment_type = payment;
 				}
 				$.get(TAXI_DATASET_URL, query, displayResults);
 			}
 
 			function displayResults(rides, status){
-				console.log(rides, status);
+				// console.log(rides, status);
 				var output = document.getElementById('output');
 					output.innerHTML = '';
-				rides.forEach(ride => {
-					var div = document.createElement('p');
-					var h3 = document.createElement('h3');
-						h3.innerText = ride.company || 'No Company Listed';
-						div.appendChild(h3);
-					var p = document.createElement('p');
-						p.innerText = 'Fare: $' + parseFloat(ride.fare, 10).toFixed(2);
-						div.appendChild(p);
-					output.appendChild(div);
-				});
+				if(rides.length > 0){
+					rides.forEach(ride => {
+						var div = document.createElement('p');
+						var h3 = document.createElement('h3');
+							h3.innerText = ride.company || 'No Company Listed';
+							div.appendChild(h3);
+						var p = document.createElement('p');
+							var s1 = document.createElement('span');
+								s1.innerText = 'Fare: $' + parseFloat(ride.fare, 10).toFixed(2) + ' (' + ride.payment_type + ')';
+							var s2 = document.createElement('span');
+								s2.innerText = 'Distance: ' + parseFloat(ride.trip_miles, 10).toFixed(2) + ' mi';
+							p.appendChild(s1);
+							p.appendChild(s2);
+							div.appendChild(p);
+						output.appendChild(div);
+					});
+				}
+				else{
+					var nr = document.createElement('p');
+						nr.innerText = 'No Results Found.';
+					output.appendChild(nr);
+				}
 			}
 
 		</script>
