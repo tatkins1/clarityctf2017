@@ -60,24 +60,46 @@
 		}
 
 		s_ajaxListener.callback = function () {
-			console.log(this.method, this.url, this.data);
+			var _this = this;
+			capturedEvents.push({
+				method: _this.method,
+				url: _this.url,
+				data: _this.data
+			});
 		}
 
 		var submissions = {};
+		var capturedEvents = [];
+
+		function getCapturedEvents(nn){
+			var n = nn || 1;
+			var eventList = [];
+			for(var i = 0; i < n; i++){
+				var evt = capturedEvents.shift() || false;
+				eventList.push(evt);
+			}
+			capturedEvents = [];
+			return eventList;
+		}
 
 		try{
+			capturedEvents = [];
 			var searchButton = document.getElementById('search-button');
 			searchButton.click();
+			submissions['16a'] = getCapturedEvents(1)[0];
 		}
 		catch(e){
-			console.log(e)
 			return true;
 		}
 		finally{
+			var ans = submissions['16a'] || false;
+			if(ans){
+				ans = ans.url.split('resource/')[1].split('.json')[0];
+			}
 			$.post(CTF_URL + '16a', {
 				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
-				answer: submissions['16a']
+				answer: ans
 			}).then((res) => {
 				displayResult(res);
 			});

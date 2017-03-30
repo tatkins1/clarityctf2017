@@ -23,6 +23,7 @@
 
 		<h1>Search Taxi Ride Records</h1>
 			<p>Create Your Form Here</p>
+			<input id="search-button" type="button" value="Search" onclick="search();">
 		<div>
 			
 		</div>
@@ -43,7 +44,9 @@
 			 */
 
 			// A sample search call: see the results on your page!
-			searchTaxiRides(null, null, 'Cash');
+			function search(){
+				searchTaxiRides(null, null, 'Cash');
+			}
 
 			function searchTaxiRides(company, fare, payment){
 				// Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
