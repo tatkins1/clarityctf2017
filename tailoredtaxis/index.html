@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Search Taxi Ride Records</h1>
+			<!-- Create Your Form Here -->
+		<div>
+			
+		</div>
+
+		<h2>Search Results</h2>
+		<div id="output"></div>
+
+
+		<script type="text/javascript">
+
+			var TAXI_DATASET_URL = 'https://data.cityofchicago.org/resource/wrvz-psew.json';
+
+			function searchTaxiRides(company, fare, payment){
+				var query = {
+					'$limit': 20 // Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
+				}
+				if(company){
+					query.company = company;
+				}
+				if(fare){
+					query.fare = fare;
+				}
+				if(payment){
+					query.payment = payment;
+				}
+				$.get(TAXI_DATASET_URL, query, displayResults);
+			}
+
+			function displayResults(rides, status){
+				console.log(rides, status);
+				var output = document.getElementById('output');
+					output.innerHTML = '';
+				rides.forEach(ride => {
+					var div = document.createElement('p');
+					var h3 = document.createElement('h3');
+						h3.innerText = ride.company || 'No Company Listed';
+						div.appendChild(h3);
+					var p = document.createElement('p');
+						p.innerText = 'Fare: $' + parseFloat(ride.fare, 10).toFixed(2);
+						div.appendChild(p);
+					output.appendChild(div);
+				});
+			}
+
+		</script>
+
+		<!-- <script src="tests.js"></script> -->
+
+	</body>
+</html>
