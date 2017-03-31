@@ -234,7 +234,7 @@
 		}
 
 		try{
-			displayInstruction('Listening for 16h: Run a search for rides paid by credit card.');
+			displayInstruction('Listening for 16h: Run a search for rides paid by credit card');
 			var searchButton = document.getElementById('search-button');
 			searchButton.addEventListener('click', e => {
 				var last = capturedEvents[capturedEvents.length - 1];
