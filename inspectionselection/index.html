@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+			span {
+				display: inline-block;
+			}
+
+			span:nth-child(1) {
+				width: 150px;
+			}
+
+			span:nth-child(2) {
+				width: 125px;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Search Food Inspections</h1>
+		<h2>Search Results</h2>
+		<div id="output"></div>
+
+
+		<script type="text/javascript">
+
+			var INSPECTION_DATASET_URL = 'https://data.cityofchicago.org/resource/cwig-ma7x.json';
+
+			$.get(INSPECTION_DATASET_URL, {
+				'$limit': 10
+			}, displayResults);
+
+			function displayResults(data, status){
+				// console.log(data, status);
+				var output = document.getElementById('output');
+					output.innerHTML = '';
+				if(data.length > 0){
+					data.forEach(ride => {
+						var div = document.createElement('p');
+						var h3 = document.createElement('h3');
+							h3.innerText = ride.company || 'No Company Listed';
+							div.appendChild(h3);
+						var p = document.createElement('p');
+							var s1 = document.createElement('span');
+								s1.innerText = 'Fare: $' + parseFloat(ride.fare, 10).toFixed(2) + ' (' + ride.payment_type + ')';
+							var s2 = document.createElement('span');
+								s2.innerText = 'Distance: ' + parseFloat(ride.trip_miles, 10).toFixed(2) + ' mi';
+							p.appendChild(s1);
+							p.appendChild(s2);
+							div.appendChild(p);
+						output.appendChild(div);
+					});
+				}
+				else{
+					var nr = document.createElement('p');
+						nr.innerText = 'No Results Found.';
+					output.appendChild(nr);
+				}
+			}
+
+		</script>
+
+		<script src="tests.js"></script>
+
+	</body>
+</html>
