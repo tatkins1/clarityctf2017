@@ -24,7 +24,20 @@
 
 			var INSPECTION_DATASET_URL = 'https://data.cityofchicago.org/resource/cwig-ma7x.json';
 
+			/*
+			 * This challenge demonstrates a Socrata location query
+			 * It returns all rows in the dataset within a given radius of a point
+			 * The point is specified in terms of latitude and longitude
+			 * The radius is specified in terms of meters
+			 * You might recognize the coordinates below... ;)
+			 */
+
+			var latitude = 41.83713129;
+			var longitude = -87.6237945;
+			var radius = 3200;
+
 			$.get(INSPECTION_DATASET_URL, {
+				'$where': 'within_circle(location, ' + latitude + ', ' + longitude + ', ' + radius + ')',
 				'$limit': 10
 			}, displayResults);
 
