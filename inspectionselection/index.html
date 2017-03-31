@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+			span {
+				display: inline-block;
+				width: 125px;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<h1>Search Food Inspections</h1>
+		<h2>Search Results</h2>
+		<div id="output"></div>
+
+		<script src="../lib/moment.min.js"></script>
+
+		<script type="text/javascript">
+
+			var INSPECTION_DATASET_URL = 'https://data.cityofchicago.org/resource/cwig-ma7x.json';
+
+			/*
+			 * This challenge demonstrates a Socrata location query
+			 * It returns all rows in the dataset within a given radius of a point
+			 * The point is specified in terms of latitude and longitude
+			 * The radius is specified in terms of meters
+			 * You might recognize the coordinates below... ;)
+			 */
+
+			var latitude = 41.83713129;
+			var longitude = -87.6237945;
+			var radius = 3200;
+
+			$.get(INSPECTION_DATASET_URL, {
+				'$where': 'within_circle(location, ' + latitude + ', ' + longitude + ', ' + radius + ')',
+				'$limit': 10
+			}, displayResults);
+
+			function displayResults(data, status){
+				console.log(data, status);
+				var output = document.getElementById('output');
+					output.innerHTML = '';
+				if(data.length > 0){
+					data.forEach(incident => {
+						var div = document.createElement('p');
+						var h3 = document.createElement('h3');
+							h3.innerText = toSentenceCase(incident.aka_name || incident.dba_name);
+							div.appendChild(h3);
+						var p = document.createElement('p');
+							var s1 = document.createElement('span');
+								s1.innerText = incident.risk;
+							var s2 = document.createElement('span');
+								s2.innerText = 'Date: ' + moment(incident.inspection_date).format('M/D/YY');
+						var p2 = document.createElement('p');
+							p2.innerText = incident.violations || 'No violations listed.'
+							p.appendChild(s1);
+							p.appendChild(s2);
+							div.appendChild(p);
+							div.appendChild(p2);
+						output.appendChild(div);
+					});
+				}
+				else{
+					var nr = document.createElement('p');
+						nr.innerText = 'No Results Found.';
+					output.appendChild(nr);
+				}
+			}
+
+			function toSentenceCase(text){
+				var newText = text.trim();
+				return newText.split(' ').map(word => {
+					var newWord = word.toLowerCase();
+					newWord = newWord[0].toUpperCase() + newWord.substr(1);
+					return newWord;
+				}).join(' ');
+			}
+
+		</script>
+
+	</body>
+</html>
