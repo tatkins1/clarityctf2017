@@ -218,5 +218,33 @@
 			});
 		}
 
+		function testRadioSearch(){
+			var ans = submissions['16h'];
+			if(ans){
+				var idx = ans.data.indexOf('&payment');
+				ans = ans.data.substr(idx);
+			}
+			$.post(CTF_URL + '16h', {
+				silent: SECRETS['IS_SILENT'],
+				team: SECRETS['TEAM_API_KEY'],
+				answer: ans
+			}).then((res) => {
+				displayResult(res);
+			});
+		}
+
+		try{
+			displayInstruction('Listening for 16h: Run a search for rides paid by credit card.');
+			var searchButton = document.getElementById('search-button');
+			searchButton.addEventListener('click', e => {
+				var last = capturedEvents[capturedEvents.length - 1];
+				submissions['16h'] = last || false;
+				testRadioSearch();
+			});
+		}
+		catch(e){
+			return true;
+		}
+
 	});
 })();
