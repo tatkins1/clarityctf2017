@@ -192,5 +192,31 @@
 			});
 		}
 
+		var fareTest = [];
+		try{
+			var rangeInput = document.getElementById('fare');
+			fareTest.push(new Promise((resolve, reject) => {
+				rangeInput.addEventListener('change', e => {
+					var rangeDisplay = document.getElementById('fare-display');
+					submissions['16g'] = rangeDisplay.innerText;
+					resolve();
+				});
+			}));
+			rangeInput.value = 7.5;
+			rangeInput.dispatchEvent(new Event('change'));
+		}
+		catch(e){
+			return true;
+		}
+		finally{
+			$.post(CTF_URL + '16g', {
+				silent: SECRETS['IS_SILENT'],
+				team: SECRETS['TEAM_API_KEY'],
+				answer: submissions['16g']
+			}).then((res) => {
+				displayResult(res);
+			});
+		}
+
 	});
 })();
