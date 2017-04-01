@@ -1,4 +1,5 @@
 // Use function testResult in this file to test your answer to the flag.
+// Remember you might have to change the package!
 // `secrets.txt` file must be in the root directory.
 // Sample Usage (in another java file):
 //  import helper.helper // The first helper is the package name!
