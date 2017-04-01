@@ -4,7 +4,7 @@ You have been working with the Clarity team to develop [the Metra website](https
 
 Note: access to the staging site will only be available when on the Clarity network, so only on-site during the competition.
 
-Report basic scenarios that caused any errors you encounterm including items such as:
+Report basic scenarios that caused any errors you encounter including items such as:
 * Description of error
 * Browser
 * Browser version
