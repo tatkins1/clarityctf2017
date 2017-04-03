@@ -6,8 +6,8 @@ Your task will be to implement a program that uses the provided server logs to s
 - If the number of times the IP is recorded is greater than 80 then attack on server.
 
 ## Flags
-- 10a: Identify _DOS_ attack.
-    Your answer should be a string of the form `{Malicious IP},{No. of Requests}` eg. `10.20.30.40,115`
+- 10a: Identify _DOS_ attack using the `Log 5` file.
+Your answer should be a string of the form `{Malicious IP},{No. of Requests}` eg. `10.20.30.40,115`
 
 ## Judging
 Judging for this challenge will be done automatically. [Helper files](https://github.com/acmillinoistech/clarityctf2017/tree/master/helpers) have been made for popular languages to help you test your solution.
