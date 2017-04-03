@@ -1,4 +1,6 @@
 # Challenge 11: Whackamole
+**Difficulty:** Medium
+
 Clarity had previously implemented a service for the City of Chicago using data provided by 311 Service Requests. The data provided has since changed and the customer now demands more output from the data.
 
 Your task will be to implement a `Java` program to meet the new customer specifications.
