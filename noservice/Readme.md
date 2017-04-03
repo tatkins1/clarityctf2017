@@ -1,4 +1,6 @@
 # Challenge 10: No Service
+**Difficulty:** Hard
+
 Clarity wants to protect its servers from _Denial of Service_ attacks.
 
 Your task will be to implement a program that uses the provided server logs to signal the team when a _DOS_ attack is detected based on the following semantic:
@@ -7,6 +9,7 @@ Your task will be to implement a program that uses the provided server logs to s
 
 ## Flags
 - 10a: Identify _DOS_ attack using the `Log 5` file.
+
 Your answer should be a string of the form `{Malicious IP},{No. of Requests}` eg. `10.20.30.40,115`
 
 ## Judging
