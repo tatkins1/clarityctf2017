@@ -21,7 +21,7 @@ public class helper {
 		// Reading in file
 		java.io.FileInputStream inputStream = null;
 		try {
-			inputStream = new java.io.FileInputStream("secrets.txt");
+			inputStream = new java.io.FileInputStream("../../secrets.txt");
 		} catch (java.io.FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
