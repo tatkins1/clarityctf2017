@@ -1,5 +1,5 @@
 # Challenge 05: Community Event
-**Dependent on Challenge 03**
+**Dependent on [Challenge 03](https://github.com/acmillinoistech/clarityctf2017/tree/master/community)**
 
 After scrapping data from the html dump provided in _Challenge 3_ you need to analyize that data.
 
