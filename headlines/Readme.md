@@ -1,4 +1,4 @@
-# Challenge 7: Headlines
+# Challenge 07: Headlines
 
 You have been working with the Clarity team to develop websites across several Cook County agencies. Several websites have been redeveloped, and several are still on old legacy platforms.
 
@@ -10,7 +10,7 @@ Your task is to create a centralized Cook County news service, the first iterati
 
 ## Flags
 
-- [] 7a: Create any relevant files in this directory and submit the link using the contest form.
+- 07a: Create any relevant files in this directory and submit the link using the contest form.
 
 ## Judging Rubric
 
