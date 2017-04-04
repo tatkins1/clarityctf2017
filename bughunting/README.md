@@ -16,7 +16,7 @@ Report basic scenarios that caused any errors you encounter including items such
 
 ## Flags
 
-- [] 18a: Create any relevant files in this directory and submit the link using the contest form.
+- [ ] 18a: Create any relevant files in this directory and submit the link using the contest form.
 
 ## Judging Rubric
 

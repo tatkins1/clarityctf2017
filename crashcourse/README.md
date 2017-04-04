@@ -8,7 +8,7 @@ Hint: use the article to empathize with the target problem and potential users.
 
 ## Flags
 
-- [] 17a: Create any relevant files in this directory and submit the link using the contest form.
+- [ ] 17a: Create any relevant files in this directory and submit the link using the contest form.
 
 ## Judging Rubric
 

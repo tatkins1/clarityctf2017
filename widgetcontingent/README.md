@@ -10,7 +10,7 @@ Your task is to identify a widget not automatically added to Mapview and then cr
 
 ## Flags
 
-- [] 19a: Create any relevant files in this directory and submit the link using the contest form.
+- [ ] 19a: Create any relevant files in this directory and submit the link using the contest form.
 
 ## Judging Rubric
 
