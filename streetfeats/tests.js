@@ -43,7 +43,6 @@
 		}
 
 		function evaluateAnswer(flag, answer){
-			console.log(flag, answer);
 			$.post(CTF_URL + flag, {
 				silent: SECRETS['IS_SILENT'],
 				team: SECRETS['TEAM_API_KEY'],
