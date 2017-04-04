@@ -14,8 +14,8 @@ Hint: use the article to empathize with the target problem and potential users.
 
 Points | Criteria
 ------ | --------
-5 | Create form inputs.
-10 | Implement appropriate error checking on required fields and validate submitted data.
-15 | Create email method for sending data.
+20 | Create form inputs.
+20 | Implement appropriate error checking on required fields and validate submitted data.
 20 | Create database capture of data, for potential reporting in the future.
-15 | Implement captcha and/or anti-spamming methods. (BONUS)
+30 | Usability and design: will this be easy for actual users to use?
+10 | Implement captcha and/or anti-spamming methods.

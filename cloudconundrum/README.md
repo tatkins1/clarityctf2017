@@ -22,7 +22,7 @@ You are the CTO of a new startup. Your CEO has asked that you determine which cl
 
 Points | Criteria
 ------ | --------
-5 | Cloud service provider suggested.
-15 | Cloud services use cases provided and supported.
+10 | Cloud service provider suggested.
+40 | Cloud services use cases provided and supported.
 10 | Cloud services cost estimate.
-20 | Reasoning for recommendations.
+40 | Reasoning for recommendations.

@@ -22,7 +22,7 @@ Report basic scenarios that caused any errors you encounter including items such
 
 Points | Criteria
 ------ | --------
-1 | For each reported element from the list above for each bug found.
-10 | Create a centralized/systemic method for reporting bugs.
+5 | For each reported element from the list above for each bug found (up to 50 total points).
+20 | Create a centralized/systemic method for reporting bugs.
 20 | Creating and documenting set of use cases to test against.
-30 | Create automated unit tests (i.e., using a tool like Selenium) (BONUS)
+10 | Create automated unit tests (i.e., using a tool like Selenium).
