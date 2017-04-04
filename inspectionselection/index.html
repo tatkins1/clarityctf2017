@@ -1,86 +1,135 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 		<title>Clarity/ACM CTF 2017</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<style type="text/css">
 
-			span {
-				display: inline-block;
-				width: 125px;
+		<!-- Esri Map Assets -->
+		<link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+		<script src="https://js.arcgis.com/4.3/"></script>
+		
+		<style>
+
+			html, body, #viewDiv {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
 			}
 
 		</style>
-	</head>
+
+		</head>
 	<body>
 
-		<h1>Search Food Inspections</h1>
-		<h2>Search Results</h2>
-		<div id="output"></div>
+		<div id="viewDiv"></div>
 
-		<script src="../lib/moment.min.js"></script>
+		<script>
 
-		<script type="text/javascript">
+			var VIEW = null;
 
-			/*
-			 * This challenge demonstrates a Socrata location query
-			 * It returns all rows in the dataset within a given radius of a point
-			 * The point is specified in terms of latitude and longitude
-			 * The radius is specified in terms of meters
-			 * You might recognize the coordinates below... ;)
-			 */
+			var INSPECTION_DATASET_URL = 'https://data.cityofchicago.org/resource/cwig-ma7x.json';
 
 			var latitude = 41.83713129;
 			var longitude = -87.6237945;
 			var radius = 3200;
 
-			$.get(INSPECTION_DATASET_URL, {
-				'$where': 'within_circle(location, ' + latitude + ', ' + longitude + ', ' + radius + ')',
-				'$limit': 10,
-				inspection_date: new Date(Date.UTC(2015, 0, 8)).toISOString().replace('Z', '')
-			}, console.log);
+			/*
+			 * This code has been modified from the tutorial linked below to demonstrate points rather than lines
+			 * Link: https://developers.arcgis.com/javascript/latest/sample-code/get-started-graphics/index.html
+			 */
 
-			function displayResults(data, status){
-				console.log(data, status);
-				var output = document.getElementById('output');
-					output.innerHTML = '';
-				if(data.length > 0){
-					data.forEach(incident => {
-						var div = document.createElement('p');
-						var h3 = document.createElement('h3');
-							h3.innerText = toSentenceCase(incident.aka_name || incident.dba_name);
-							div.appendChild(h3);
-						var p = document.createElement('p');
-							var s1 = document.createElement('span');
-								s1.innerText = incident.risk;
-							var s2 = document.createElement('span');
-								s2.innerText = 'Date: ' + moment(incident.inspection_date).format('M/D/YY');
-						var p2 = document.createElement('p');
-							p2.innerText = incident.violations || 'No violations listed.'
-							p.appendChild(s1);
-							p.appendChild(s2);
-							div.appendChild(p);
-							div.appendChild(p2);
-						output.appendChild(div);
-					});
-				}
-				else{
-					var nr = document.createElement('p');
-						nr.innerText = 'No Results Found.';
-					output.appendChild(nr);
-				}
-			}
+			require([
+				"esri/Map",
+				"esri/views/MapView",
+				"esri/geometry/Point",
+				"esri/symbols/SimpleMarkerSymbol",
+				"esri/Graphic",
+				"esri/PopupTemplate",
+				"dojo/domReady!"
+			], function(
+				Map,
+				MapView,
+				Point,
+				SimpleMarkerSymbol,
+				Graphic,
+				PopupTemplate
+			) {
 
-			function toSentenceCase(text){
-				var newText = text.trim();
-				return newText.split(' ').map(word => {
-					var newWord = word.toLowerCase();
-					newWord = newWord[0].toUpperCase() + newWord.substr(1);
-					return newWord;
-				}).join(' ');
-			}
+				var map = new Map({
+					basemap: "dark-gray"
+				});
+
+				var view = new MapView({
+					center: [-87.6, 41.8],
+					container: "viewDiv",
+					map: map,
+					zoom: 3
+				});
+
+				// First create a point geometry (this is the Keystone pipeline)
+				var point = new Point({
+					longitude: longitude,
+					latitude: latitude
+				});
+
+				// Create a symbol for drawing the point
+				var pointSymbol = new SimpleMarkerSymbol({
+					color: [226, 119, 40],
+					size: 10
+				});
+
+				// Create an object for storing attributes related to the point
+				var pointAttrs = {
+					Name: "Illinois Institute of Technology",
+					Type: "School",
+					Students: "7,792"
+				};
+
+				/*******************************************
+				* Create a new graphic and add the geometry,
+				* symbol, and attributes to it. You may also
+				* add a simple PopupTemplate to the graphic.
+				* This allows users to view the graphic's
+				* attributes when it is clicked.
+				******************************************/
+				var pointGraphic = new Graphic({
+					geometry: point,
+					symbol: pointSymbol,
+					attributes: pointAttrs,
+					popupTemplate: {
+						title: "{Name}",
+						content: [{
+							type: "fields",
+							fieldInfos: [{
+									fieldName: "Name"
+								}, {
+									fieldName: "Type"
+								}, {
+									fieldName: "Students"
+							}]
+						}]
+					}
+				});
+
+				$.get(INSPECTION_DATASET_URL, {
+					'$where': 'within_circle(location,' + latitude + ',' + longitude + ',' + radius + ')',
+					'$limit': 10
+				}, console.log);
+
+				// Add the point graphic to the view's GraphicsLayer
+				view.graphics.add(pointGraphic);
+
+				// Do not remove: otherwise test cases will fail
+				window.dispatchEvent(new CustomEvent('esri-loaded', {detail: view}));
+
+			});
 
 		</script>
+
+		<script src="tests.js"></script>
 
 	</body>
 </html>
