@@ -14,7 +14,7 @@ You are a private contractor who has been hired as a cloud solutions architect f
 
 You are the CTO of a new startup. Your CEO has asked that you determine which cloud service provider suites your application best.  Your application must store massive amounts of user data and process this data on the backend. After analyzing this data your application creates network trees to show connections between users and display this information to your users on phones, tablets and computers. Your application has the potential to go viral within the month so it must be able to scale quickly and efficiently. Your CEO has stressed that cost is very important when considering a provider. Which cloud service provider would you recommend and why?
 
-## Flags
+## Flags
 
 - [ ] 20a: Create any relevant files in this directory and submit the link using the contest form.
 
