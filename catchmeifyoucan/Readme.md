@@ -1,5 +1,4 @@
 # Challenge 12: Catch Me If You Can
-**Difficulty:** Hard
 
 Clarity has been hired by the City of Chicago to develop a service to alert aldermen about the level of crime in their respective wards.
 
