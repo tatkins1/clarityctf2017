@@ -1,5 +1,4 @@
 # Challenge 10: No Service
-**Difficulty:** Hard
 
 Clarity wants to protect its servers from _Denial of Service_ attacks.
 
