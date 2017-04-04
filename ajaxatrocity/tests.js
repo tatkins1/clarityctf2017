@@ -108,7 +108,7 @@
 			});
 		});
 
-		displayInstruction('If no flags appear, it means you have not done anything with the completed calls.');
+		displayInstruction('Listening for flags 01a-d');
 
 	});
 })();

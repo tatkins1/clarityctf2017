@@ -117,7 +117,7 @@
 			characterData: true
 		}
 		observer.observe(outputDiv, config);
-		displayInstruction('Listening for 13d-f');
+		displayInstruction('Listening for Flags 13d-f');
 
 	});
 })();
