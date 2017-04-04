@@ -28,10 +28,6 @@
 
 			var picker = new Pikaday({
 				field: datepicker,
-				disableWeekends: true,
-				yearRange: [2004, 2010],
-				bound: false,
-				container: document.getElementById('container'),
 				onSelect: function(){
 					$.get('https://data.cityofchicago.org/resource/x3ag-h7gt.json', {
 						go_live_date: datepicker.value
@@ -42,14 +38,8 @@
 			function listRedLightCameras(cameras, status){
 				console.log(cameras, status);
 				// STUB: output the intersection for each camera as an <li> in ul#output
-				var output = document.getElementById('output');
-				cameras.forEach(camera => {
-					var li = document.createElement('li');
-						li.innerText = camera.intersection;
-						output.appendChild(li);
-				});
-				var datedisplay = document.getElementById('datedisplay');
-					datedisplay.innerText = moment(picker.getDate()).format('dddd MMMM DD[th], YYYY');
+				// STUB: display the date in the given format
+				// Hint: moment.js is your friend!
 			}
 
 		</script>

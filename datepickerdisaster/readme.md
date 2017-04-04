@@ -2,6 +2,10 @@
 
 Datepickers are a point of great debate for most web developers... everyone has their own library or plugin they prefer. But for this project, Clarity has been tasked with fixing a broken website that searches red light cameras in the city based on the date they were installed. This website uses pikaday.js and your job is to work with that library to upgrade the website.
 
+## Links
+
+* [Pikaday Documentation](https://github.com/dbushell/Pikaday)
+
 ## Flags
 
 - [ ] 13a: Unbind datepicker from input and put it in `div#container`.
