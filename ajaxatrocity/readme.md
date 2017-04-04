@@ -4,10 +4,10 @@ Asynchronous JavaScript and XML requests (AJAX) are crucial to web development. 
 
 ## Flags
 
-[ ] 01a: Fix the bad callback and print the results to #output-bad-callback.
-[ ] 01b: Fix the bad promise and print the results to #output-bad-promise.
-[ ] 01c: Search for reports closed on 03/31/2017 of graffiti on unpainted brick and print the results to #output-brick-unpainted.
-[ ] 01d: Make a call to 'https://data.cityofchicago.org/resource/byhn-gzba.json' and display the Socrata error code in #output-error.
+- [ ] 01a: Fix the bad callback and print the results to #output-bad-callback.
+- [ ] 01b: Fix the bad promise and print the results to #output-bad-promise.
+- [ ] 01c: Search for reports closed on 03/31/2017 of graffiti on unpainted brick and print the results to #output-brick-unpainted.
+- [ ] 01d: Make a call to 'https://data.cityofchicago.org/resource/byhn-gzba.json' and display the Socrata error code in #output-error.
 
 ## Judging
 
