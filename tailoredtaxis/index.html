@@ -23,10 +23,7 @@
 
 		<h1>Search Taxi Ride Records</h1>
 			<p>Create Your Form Here</p>
-			<label id="fare-display"></label><input type="range" min="4" max="20" step="0.25" id="fare">
-			<label>Cash<input type="radio" name="payment" value="Cash"></label>
-			<label>Credit Card<input type="radio" name="payment" value="Credit Card"></label>
-			<input id="search-button" type="button" value="Search" onclick="search();">
+			<input id="search-button" type="button" value="Search">
 		<div>
 			
 		</div>
@@ -39,41 +36,15 @@
 
 			var TAXI_DATASET_URL = 'https://data.cityofchicago.org/resource/wrvz-psew.json';
 
+			// A sample search call: see the results on your page!
+			searchTaxiRides(null, 4.25, null);
+
 			/*
 			 * Call this function to search the rides dataset
 			 * You can search with no arguments, some, or all of them
 			 * This function always calls displayResults() when it finishes
 			 * If you see how it works, you can call a different callback function!
 			 */
-
-			// A sample search call: see the results on your page!
-			function search(){
-				var pay = document.querySelector('input[name=payment]:checked')
-				if(pay){
-					searchTaxiRides(null, null, pay.value);
-				}
-				else{
-					searchTaxiRides(null, 4.25, null);
-				}
-			}
-
-			var fareInput = document.getElementById('fare');
-				fareInput.addEventListener('change', e => {
-					var fd = document.getElementById('fare-display');
-					fd.innerText = '$' + parseFloat(e.target.value, 10).toFixed(2);
-				});
-
-			// Find as many valid company names as possible
-
-			$.get(TAXI_DATASET_URL, {}, data => {
-				var comps = {};
-				data.forEach(item => {
-					if(item.company){
-						comps[item.company] = true;
-					}
-				});
-				//console.log(Object.keys(comps).join('\n'));
-			});
 
 			function searchTaxiRides(company, fare, payment){
 				// Shows only the first 20 results (this is huge dataset and most queries cap their results at 1000 items)
