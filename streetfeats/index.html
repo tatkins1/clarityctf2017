@@ -14,22 +14,29 @@
 		<h3>Check Address Validity</h3>
 		<input id="street-input" type="text">
 		<button id="street-button">Submit</button>
-		<p id="result"></p>
+		<ul id="result"></ul>
 
 		<script src="../lib/moment.min.js"></script>
-		<!--<script src="tests.js"></script>-->
+		<script src="tests.js"></script>
 
 		<script type="text/javascript">
 
 			var STREETS_DATASET_URL = 'https://data.cityofchicago.org/resource/pasq-g8mx.json';
 
+			function showResult(input, result){
+				var output = document.getElementById('result');
+				var li = document.createElement('li');
+					li.innerText = input + ': ' + result;
+					output.appendChild(li);
+			}
+
 			var button = document.getElementById('street-button');
 			button.addEventListener('click', function(e){
-				// STUB: Get the input from #street-input
+				var input = document.getElementById('street-input').value.trim();
 				// STUB: Make a request to the dataset
 				// STUB: Determine if the input address is valid
-				var output = document.getElementById('result');
-					output.innerHTML = 'Reply Hazy...';
+				var result = 'Reply Hazy...';
+				showResult(input, result);
 			});
 
 		</script>
