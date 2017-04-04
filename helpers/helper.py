@@ -9,7 +9,7 @@ import requests
 import json
 
 def testResult(flag, answer):
-    team = open('secrets.txt','r').read().split('::')[1].split( )[0]
+    team = open('../secrets.txt','r').read().split('::')[1].split( )[0]
 
     url = "https://acm-sinatra-vingkan.c9users.io/submission/" + str(flag)
     payload = {'team': team, 'answer': str(answer)}
