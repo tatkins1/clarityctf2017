@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clarity/ACM CTF 2017</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+
+
+
+		</style>
+	</head>
+	<body>
+
+		<h3>Check Address Validity</h3>
+		<input id="street-input" type="text">
+		<button id="street-button">Submit</button>
+		<p id="result"></p>
+
+		<script src="../lib/moment.min.js"></script>
+		<!--<script src="tests.js"></script>-->
+
+		<script type="text/javascript">
+
+			var STREETS_DATASET_URL = 'https://data.cityofchicago.org/resource/pasq-g8mx.json';
+
+			var button = document.getElementById('street-button');
+			button.addEventListener('click', function(e){
+				// STUB: Get the input from #street-input
+				// STUB: Make a request to the dataset
+				// STUB: Determine if the input address is valid
+				var output = document.getElementById('result');
+					output.innerHTML = 'Reply Hazy...';
+			});
+
+		</script>
+
+	</body>
+</html>
