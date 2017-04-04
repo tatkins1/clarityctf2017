@@ -50,14 +50,6 @@
 
 					var communityInput = document.getElementById('community');
 
-					if(communityInput.value !== communityInput.value.toUpperCase()){
-						throw new Error(ERROR['C104']);
-					}
-
-					if(communityInput.value.length < 4){
-						throw new Error(ERROR['C105']);
-					}
-
 					$.get(GROCERY_DATASET_URL, {
 						community_area_name: communityInput.value,
 					}, displayResults);
