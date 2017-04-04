@@ -1,3 +1,8 @@
+// Use function testResult in this file to test your answer to the flag.
+// `secrets.txt` file must be in the root directory.
+// Sample Usage:
+//   testResult("12c", "abc")
+
 function colorFlag(res){
 	return 'background: ' + (res.correct ? 'green' : 'red') + '; color: white;';
 }
