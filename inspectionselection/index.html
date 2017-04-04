@@ -59,11 +59,11 @@
 			) {
 
 				var map = new Map({
-					basemap: "dark-gray"
+					basemap: "hybrid"
 				});
 
 				var view = new MapView({
-					center: [-87.6, 41.8],
+					center: [longitude, latitude],
 					container: "viewDiv",
 					map: map,
 					zoom: 3
@@ -113,11 +113,6 @@
 						}]
 					}
 				});
-
-				$.get(INSPECTION_DATASET_URL, {
-					'$where': 'within_circle(location,' + latitude + ',' + longitude + ',' + radius + ')',
-					'$limit': 10
-				}, console.log);
 
 				// Add the point graphic to the view's GraphicsLayer
 				view.graphics.add(pointGraphic);
