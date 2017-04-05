@@ -35,6 +35,14 @@
 			button.addEventListener('click', function(e){
 				var input = document.getElementById('street-input').value.trim();
 				// STUB: Make a request to the dataset
+				$.get(STREETS_DATASET_URL, {
+					
+				
+			}).done(function(data){
+				
+			}).fail(function(err){
+				
+			});
 				// STUB: Determine if the input address is valid
 				var result = 'Reply Hazy...';
 				showResult(input, result);

@@ -147,17 +147,23 @@
 				'completion_date': '2017-03-31T00:00:00.000',
 				'status': 'Completed',
 				'$limit': 5
+			}, function(data){
+				var out5 = document.getElementById('output-bad-callback');
+			outputGraffiti(out5, data); 
+
 			});
 
-			var out5 = document.getElementById('output-bad-callback');
-			outputGraffiti(out5, graffitiData);
-
+			
 			var promise2 = new Promise(function(resolve, reject){
 				$.get(GRAFFITI_DATASET_URL, {
 					'completion_date': '2017-03-31T00:00:00.000',
 					'status': 'Completed',
 					'$limit': 5
-				});
+				}).done(function(data){
+					resolve(data);
+			}).fail(function(err){
+					reject(err.statusText);
+						});
 			});
 
 			promise2.then(function(data){
@@ -175,6 +181,17 @@
 			 */
 
 			// STUB: Write your own AJAX call
+			$.get(GRAFFITI_DATASET_URL, {
+				'completion_date': '2017-03-31T00:00:00.000',
+				'status': 'Completed',
+				'what_type_of_surface_is_the_graffiti_on_':'Brick - Unpainted'
+			}).done(function(data){
+				var out3 = document.getElementById('output-brick-unpainted');
+				outputGraffiti(out3, data);
+			}).fail(function(err){
+				console.error(err);
+			});
+
 
 			/*
 			 * Now make a GET request to: 'https://data.cityofchicago.org/resource/byhn-gzba.json'
@@ -184,6 +201,17 @@
 			 */
 
 			// STUB: Handle the AJAX Error
+			$.get('https://data.cityofchicago.org/resource/byhn-gzba.json', {
+				
+			}).done(function(data){
+				var out3 = document.getElementById('output-handler');
+				outputGraffiti(out3, data);
+			}).fail(function(err){
+				var outt = document.getElementById('output-error');
+				console.error(err);
+				outt.innerHTML=err.responseJSON.code;
+				//outputGraffiti(outt, err.statusText);
+			});
 
 		</script>
 

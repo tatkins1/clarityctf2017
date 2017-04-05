@@ -1,50 +1,41 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Clarity/ACM CTF 2017</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="pikaday.css">
-		<style type="text/css">
-
-
-
-		</style>
-	</head>
-	<body>
-
-		<input type="text" id="datepicker" style="display: none;">
-		<div id="container"></div>
-		<h3>Red Light Cameras Posted on <span id="datedisplay"></span></h3>
-		<ul id="output"></ul>
-
-		<script src="../lib/moment.min.js"></script>
-		<script src="pikaday.js"></script>
-
-		<script type="text/javascript">
-
-			// API Documentation: https://github.com/dbushell/Pikaday
-
-			var datepicker = document.getElementById('datepicker');
-
-			var picker = new Pikaday({
-				field: datepicker,
-				onSelect: function(){
-					$.get('https://data.cityofchicago.org/resource/x3ag-h7gt.json', {
-						go_live_date: datepicker.value
-					}, listRedLightCameras);
-				}
-			});
-
-			function listRedLightCameras(cameras, status){
-				console.log(cameras, status);
-				// STUB: output the intersection for each camera as an <li> in ul#output
-				// STUB: display the date in the given format
-				// Hint: moment.js is your friend!
-			}
-
-		</script>
-
-		<script src="tests.js"></script>
-
-	</body>
+    <head>
+        <title>Clarity/ACM CTF 2017</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="pikaday.css">
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+        <input type="text" id="datepicker" style="display: none;">
+        <div id="container"></div>
+        <h3>Red Light Cameras Posted on <span id="datedisplay"></span></h3>
+        <ul id="output"></ul>
+        <script src="../lib/moment.min.js"></script>
+        <script src="pikaday.js"></script>
+        <script type="text/javascript">
+            // API Documentation: https://github.com/dbushell/Pikaday
+            var datepicker = document.getElementById('datepicker');
+            var disable = false, picker = new Pikaday({
+                field: datepicker,
+                bound: false,
+                disableWeekends: true,
+                yearRange: [2004,2010],
+                container: document.getElementById('container'),
+                onSelect: function(){
+                    $.get('https://data.cityofchicago.org/resource/x3ag-h7gt.json', {
+                        go_live_date: datepicker.value
+                    }, listRedLightCameras);
+                }
+            });
+            function listRedLightCameras(cameras, status){
+                console.log(cameras, status);
+                // STUB: output the intersection for each camera as an <li> in ul#output
+                // STUB: display the date in the given format
+                // Hint: moment.js is your friend!
+            }
+        </script>
+        <script src="tests.js"></script>
+    </body>
 </html>
